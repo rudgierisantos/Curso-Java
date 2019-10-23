@@ -84,8 +84,7 @@ public class ServletsTelefone extends HttpServlet {
 
 			String acao = request.getParameter("acao");
 
-			if (acao == null
-					|| (acao != null && acao.equalsIgnoreCase("voltar"))) {
+			if (acao == null || (acao != null && !acao.equalsIgnoreCase("voltar"))) {
 
 				if (numero == null || (numero != null && numero.isEmpty())) {
 

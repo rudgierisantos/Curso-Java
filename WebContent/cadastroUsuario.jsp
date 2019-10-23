@@ -32,66 +32,58 @@
 					<tr>
 						<td>Código:</td>
 						<td><input type="text" readonly="readonly" id="id" name="id"
-							value="${user.id}" class="field-long"></td>
+							value="${user.id}"></td>
 
 						<td>Cep:</td>
-						<td><input type="text" id="cep" name="cep"
+						<td><input type="text" id="cep" name="cep" maxlength="8"
 							value="${user.cep}" placeholder="Informe o Cep"
-							onblur="consultaCep();" class="field-long"></td>
+							onblur="consultaCep();" ></td>
 					</tr>
 
 					<tr>
 						<td>Nome:</td>
-						<td><input type="text" id="nome" name="nome"
+						<td><input type="text" id="nome" name="nome" maxlength="50"
 							value="${user.nome }" placeholder="Informe o Nome de Usuário"
-							class="field-long"></td>
+							></td>
 
 						<td>Rua:</td>
-						<td><input type="text" id="rua" name="rua"
+						<td><input type="text" id="rua" name="rua" maxlength="50"
 							value="${user.rua}" placeholder="Informe a rua"></td>
 					</tr>
 
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}" placeholder="informe o login"
-							class="field-long"></td>
+							value="${user.login}" maxlength="10" placeholder="informe o login"
+							></td>
 
 						<td>Bairro:</td>
-						<td><input type="text" id="bairro" name="bairro"
+						<td><input type="text" id="bairro" name="bairro" maxlength="50"
 							value="${user.bairro}" placeholder="Informe o bairro"
-							class="field-long"></td>
+							></td>
 					</tr>
 
 					<tr>
 						<td>Senha:</td>
-						<td><input type="password" id="senha" name="senha"
+						<td><input type="password" id="senha" name="senha" maxlength="10"
 							value="${user.senha }" placeholder="Defina uma senha"
-							class="field-long"></td>
+							></td>
 
 						<td>Cidade:</td>
-						<td><input type="text" id="cidade" name="cidade"
+						<td><input type="text" id="cidade" name="cidade" maxlength="50"
 							value="${user.cidade}" placeholder="Informe a cidade"
-							class="field-long"></td>
+							></td>
 					</tr>
-
-					<tr>
-						<td>Fone:</td>
-						<td><input type="text" id="fone" name="fone"
-							value="${user.fone}" placeholder="Informe o Telefone"
-							class="field-long"></td>
-
-						<td>UF:</td>
-						<td><input type="text" id="estado" name="estado"
-							class="field-long" placeholder="Informe o Estado"
-							value="${user.estado}"></td>
-					</tr>
-
 
 					<tr>
 						<td>IBGE:</td>
-						<td><input type="text" id="ibge" name="ibge"
+						<td><input type="text" id="ibge" name="ibge" maxlength="30"
 							placeholder="Informe o Ibge" value="${user.ibge}"></td>
+							
+							<td>UF:</td>
+						<td><input type="text" id="estado" name="estado" maxlength="20"
+							 placeholder="Informe o Estado"
+							value="${user.estado}"></td>
 					</tr>
 
 					<tr>
@@ -115,8 +107,9 @@
 
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar"> <input
-							type="submit" value="Cancelar"
+						<td><input type="submit" value="Salvar" style="width: 173px"></td> 
+							<td></td>
+						<td><input type="submit" value="Cancelar" style="width: 173px"
 							onclick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'"></td>
 					</tr>
 				</table>
@@ -133,7 +126,6 @@
 				<th>Login</th>
 				<th>Imagem</th>
 				<th>Curriculo</th>
-				<th>Fone</th>
 				<th>Cep</th>
 				<th>Rua</th>
 				<th>Bairro</th>
@@ -174,7 +166,6 @@
 					</c:if>
 
 
-					<td style="width: 150px"><c:out value="${user.fone}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.cep}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.rua}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.bairro}"></c:out></td>
@@ -209,8 +200,28 @@
 			} else if (document.getElementById("senha").value == '') {
 				alert('Informe a Senha');
 				return false;
-			} else if (document.getElementById("fone").value == '') {
-				alert('Informe o Telefone');
+			} else if (document.getElementById("ibge").value == '') {
+				alert('Informe o ibge');
+				return false;
+				
+			} else if (document.getElementById("cep").value == '') {
+				alert('Informe o Cep');
+				return false;
+				
+			} else if (document.getElementById("rua").value == '') {
+				alert('Informe a Rua');
+				return false;
+				
+			} else if (document.getElementById("bairro").value == '') {
+				alert('Informe o Bairro');
+				return false;
+				
+			} else if (document.getElementById("cidade").value == '') {
+				alert('Informe a Cidade');
+				return false;
+				
+			} else if (document.getElementById("estado").value == '') {
+				alert('Informe o Estado');
 				return false;
 			}
 			return true;

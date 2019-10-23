@@ -213,10 +213,6 @@ public class Usuario extends HttpServlet {
 					msg = "Nome deve ser informado";
 					podeInserir = false;
 
-				} else if (fone == null || fone.isEmpty()) {
-					msg = "Telefone deve ser informado";
-					podeInserir = false;
-
 				} else if (id == null || id.isEmpty()
 						&& !daoUsuario.validarLogin(login)) {// quando for
 																// usuario novo

@@ -86,7 +86,10 @@ public class ServletsProduto extends HttpServlet {
 			}
 
 			if (valor != null && !valor.isEmpty()) {
-				produto.setValor(Double.parseDouble(valor));
+				//"raplace" - substituir , por .
+				String valorParse = valor.replaceAll("\\.", ""); //10500,20
+				valorParse = valorParse.replaceAll("\\,", "."); //10500.20
+				produto.setValor(Double.parseDouble(valorParse)); 
 			}
 
 			try {

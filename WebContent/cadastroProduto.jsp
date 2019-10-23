@@ -26,31 +26,31 @@
 					<tr>
 						<td>Código:</td>
 						<td><input type="text" readonly="readonly" id="id" name="id"
-							value="${produto.id}" class="field-long"></td>
+							value="${produto.id}"></td>
 					</tr>
 
 					<tr>
 						<td>Nome:</td>
-						<td><input type="text" id="nome" name="nome"
+						<td><input type="text" id="nome" name="nome" maxlength="100" style="width: 300px"
 							value="${produto.nome }" class="field-long"></td>
 					</tr>
 
 					<tr>
 						<td>Quantidade:</td>
-						<td><input type="text" id="quantidade" name="quantidade"
-							value="${produto.quantidade}" class="field-long"></td>
+						<td><input type="number" id="quantidade" name="quantidade" maxlength="10"
+							value="${produto.quantidade}" ></td>
 					</tr>
 
 					<tr>
 						<td>Valor:</td>
-						<td><input type="text" id="valor" name="valor"
-							value="${produto.valor}" class="field-long"></td>
+						<td><input type="text" id="valor" name="valor" maxlength="12"
+							value="${produto.valor}" ></td>
 					</tr>
 
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar">.<input
-							type="submit" value="Cancelar"
+						<td><input type="submit" value="Salvar" style="width: 90px">.<input
+							type="submit" value="Cancelar" style="width: 90px"
 							onclick="document.getElementById('formProduto').action = 'salvarProduto?acao=reset'"></td>
 					</tr>
 
