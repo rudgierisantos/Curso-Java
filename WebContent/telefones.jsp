@@ -18,7 +18,6 @@
 		<h1>Cadastro de Telefones</h1>
 		<h3 style="color: red;">${msg}</h3>
 	</center>
-
 	<form action="salvarTelefones" method="post" id="formUser"
 		onsubmit="return validarCampos()? true :false;">
 		<ul class="form-style-1">
@@ -26,11 +25,11 @@
 				<table>
 					<tr>
 						<td>User:</td>
-						<td><input type="text" readonly="readonly" id="id" name="id"
-							class="field-long" value="${userEscolhido.id}"></td>
+						<td><input type="text" readonly="readonly" id="user"
+							name="user" class="field-long" value="${userEscolhido.id}"></td>
 
-						<td><input type="text" readonly="readonly" id="nome" name="nome"
-							class="field-long" value="${userEscolhido.nome}"></td>
+						<td><input type="text" readonly="readonly" id="nome"
+							name="nome" class="field-long" value="${userEscolhido.nome}"></td>
 					<tr>
 					<tr>
 						<td>Número:</td>
@@ -44,6 +43,10 @@
 					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Voltar" onclick="document.getElementById('formUser').action = 'salvarTelefones?acao=voltar'"></td>
 					</tr>
 				</table>
 			</li>
@@ -65,10 +68,11 @@
 					<td style="width: 150px"><c:out value="${fone.id}"></c:out></td>
 					<td style="width: 150px"><c:out value="${fone.numero}"></c:out></td>
 					<td style="width: 150px"><c:out value="${fone.tipo}"></c:out></td>
-					
 
 
-					<td><a href="salvarTelefones?acao=deleteFone&foneId=${fone.id}"><img
+
+					<td><a
+						href="salvarTelefones?user=${fone.usuario}&acao=deleteFone&foneId=${fone.id}"><img
 							src="resources/img/excluir.png" alt="Excluir" title="Excluir"
 							width="20px" height="20px"></a></td>
 				</tr>
