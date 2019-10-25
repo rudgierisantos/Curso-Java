@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de Produtos</title>
+<script src = "resources/javascript/jquery.min.js" type = "text/javascript"></script>
+<script src = "resources/javascript/jquery.maskMoney.min.js" type = "text/javascript"></script>
 <link rel="stylesheet" href="resources/css/cadastro.css">
 </head>
 <body>
 	<a href="acessoliberado.jsp"><img alt="Inicio"
 		src="resources/img/home.jpg" width="30px" height="30px"> </a>
-	<a href="index.jsp"><img alt="Sair"
-		src="resources/img/sair.png" width="30px" height="30px"> </a>
+	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png"
+		width="30px" height="30px"> </a>
 	<center>
 		<h1>Cadastro de Produtos</h1>
 		<h3 style="color: red;">${msg}</h3>
@@ -31,20 +34,20 @@
 
 					<tr>
 						<td>Nome:</td>
-						<td><input type="text" id="nome" name="nome" maxlength="100" style="width: 300px"
-							value="${produto.nome }" class="field-long"></td>
+						<td><input type="text" id="nome" name="nome" maxlength="100"
+							style="width: 300px" value="${produto.nome }" class="field-long"></td>
 					</tr>
 
 					<tr>
 						<td>Quantidade:</td>
-						<td><input type="number" id="quantidade" name="quantidade" maxlength="10"
-							value="${produto.quantidade}" ></td>
+						<td><input type="number" id="quantidade" name="quantidade"
+							maxlength="10" value="${produto.quantidade}"></td>
 					</tr>
 
 					<tr>
 						<td>Valor:</td>
-						<td><input type="text" id="valor" name="valor" maxlength="12"
-							value="${produto.valor}" ></td>
+						<td><input type="text" id="valor" name="valor" maxlength="12" data-thousands="." data-decimal="," data-precision = "2"
+							value="${produto.valorEmTexto}"></td>
 					</tr>
 
 					<tr>
@@ -76,7 +79,7 @@
 					<td style="width: 150px"><c:out value="${produto.id}"></c:out></td>
 					<td style="width: 150px"><c:out value="${produto.nome}"></c:out></td>
 					<td style="width: 150px"><c:out value="${produto.quantidade}"></c:out></td>
-					<td style="width: 150px"><c:out value="${produto.valor}"></c:out></td>
+					<td style="width: 150px"><fmt:formatNumber type="number" maxFractionDigits="2" value="${produto.valor}"/></td>
 
 					<td><a href="salvarProduto?acao=delete&produto=${produto.id}"><img
 							src="resources/img/excluir.png" alt="Excluir" title="Excluir"
@@ -106,4 +109,11 @@
 		}
 	</script>
 </body>
+
+<script type="text/javascript" >
+$(function() {
+    $('#valor').maskMoney();
+  })
+
+</script>
 </html>

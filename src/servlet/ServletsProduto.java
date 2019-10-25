@@ -34,10 +34,9 @@ public class ServletsProduto extends HttpServlet {
 						.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listarProduto());
 				view.forward(request, response);
+				
 			} else if (acao.equalsIgnoreCase("editar")) {
-
 				Produto beanCursoJsp = daoProduto.consultar(produto);
-
 				RequestDispatcher view = request
 						.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produto", beanCursoJsp);

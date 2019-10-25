@@ -22,8 +22,8 @@ public class DaoUsuario {
 	public void salvar(BeanCursoJsp usuario) {
 		try {
 
-			String sql = "insert into usuario(login, senha, nome, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype, curriculoBase64, contentTypeCurriculo) "
-					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into usuario(login, senha, nome, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype, curriculoBase64, contentTypeCurriculo, fotoBase64Miniatura) "
+					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, usuario.getLogin());
 			insert.setString(2, usuario.getSenha());
@@ -38,6 +38,7 @@ public class DaoUsuario {
 			insert.setString(11, usuario.getContentType());
 			insert.setString(12, usuario.getCurriculoBase64());
 			insert.setString(13, usuario.getContentTypeCurriculo());
+			insert.setString(14, usuario.getFotoBase64Miniatura());
 			insert.execute();
 			connection.commit();
 
@@ -71,9 +72,10 @@ public class DaoUsuario {
 			beanCursoJsp.setEstado(resultSet.getString("estado"));
 			beanCursoJsp.setIbge(resultSet.getString("ibge"));
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
-			beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
-			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculoBase64"));
-			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contentTypeCurriculo"));
+			//beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
+			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
+			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
+			beanCursoJsp.setFotoBase64Miniatura(resultSet.getString("fotobase64miniatura"));
 			listar.add(beanCursoJsp);
 		
 		}
@@ -119,8 +121,9 @@ public class DaoUsuario {
 			beanCursoJsp.setIbge(resultSet.getString("ibge"));
 			beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
-			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculoBase64"));
-			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contentTypeCurriculo"));
+			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
+			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
+			beanCursoJsp.setFotoBase64Miniatura(resultSet.getString("fotobase64miniatura"));
 			
 			return beanCursoJsp;
 		}
@@ -159,7 +162,7 @@ public class DaoUsuario {
 		try{
 		String sql = "update usuario set login = ? , senha = ?, nome = ?, cep = ?, rua = ?, "
 				+ "bairro = ?, cidade = ?, estado = ?, ibge = ?, fotobase64 = ?,contenttype = ?,"
-				+ "curriculoBase64 = ?, contentTypeCurriculo = ?  "
+				+ "curriculobase64 = ?, contentyypecurriculo = ?, fotobase64miniatura = ?  "
 				+ " where id = " + usuario.getId();
 		
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -176,6 +179,7 @@ public class DaoUsuario {
 		preparedStatement.setString(11, usuario.getContentType());
 		preparedStatement.setString(12, usuario.getCurriculoBase64());
 		preparedStatement.setString(13, usuario.getContentTypeCurriculo());
+		preparedStatement.setString(14, usuario.getFotoBase64Miniatura());
 		preparedStatement.executeUpdate();
 		connection.commit();
 		

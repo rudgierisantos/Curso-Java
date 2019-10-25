@@ -1,5 +1,8 @@
 package servlet;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -7,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -43,13 +48,13 @@ public class Usuario extends HttpServlet {
 			String acao = request.getParameter("acao");
 			String user = request.getParameter("user");
 
-			if (acao.equalsIgnoreCase("delete")) {
+			if (acao != null && acao.equalsIgnoreCase("delete") && user != null) {
 				daoUsuario.delete(user);
 				RequestDispatcher view = request
 						.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listar());
 				view.forward(request, response);
-			} else if (acao.equalsIgnoreCase("editar")) {
+			} else if (acao != null && acao.equalsIgnoreCase("editar")) {
 
 				BeanCursoJsp beanCursoJsp = daoUsuario.consultar(user);
 
@@ -58,7 +63,7 @@ public class Usuario extends HttpServlet {
 				request.setAttribute("user", beanCursoJsp);
 				view.forward(request, response);
 
-			} else if (acao.equalsIgnoreCase("listartodos"))
+			} else if (acao != null && acao.equalsIgnoreCase("listartodos"))
 
 			{
 				RequestDispatcher view = request
@@ -66,7 +71,7 @@ public class Usuario extends HttpServlet {
 				request.setAttribute("usuarios", daoUsuario.listar());
 				view.forward(request, response);
 
-			} else if (acao.equalsIgnoreCase("download")) {
+			} else if (acao != null && acao.equalsIgnoreCase("download")) {
 
 				BeanCursoJsp usuario = daoUsuario.consultar(user);
 				if (usuario != null) {
@@ -104,6 +109,11 @@ public class Usuario extends HttpServlet {
 					os.flush();
 					os.close();
 				}
+			} else {
+				RequestDispatcher view = request
+						.getRequestDispatcher("/cadastroUsuario.jsp");
+				request.setAttribute("usuarios", daoUsuario.listar());
+				view.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,24 +171,53 @@ public class Usuario extends HttpServlet {
 
 					Part imagemFoto = request.getPart("foto");
 
-					if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
-
+					if (imagemFoto != null
+							&& imagemFoto.getInputStream().available() > 0) {
+						
 						String fotoBase64 = new Base64()
-								.encodeBase64String(convertStremParabyte(imagemFoto
-										.getInputStream()));
+						.encodeBase64String(convertStremParabyte(imagemFoto.getInputStream()));
 
 						usuario.setFotoBase64(fotoBase64);
 						usuario.setContentType(imagemFoto.getContentType());
 						
-					}else{
+						/*Inicio miniatura imagem */
 						
+						 /*Transformar em um bufferedImage*/
+						/*Transforma emum bufferedImage*/
+						 byte[] imageByteDecode = new Base64().decodeBase64(fotoBase64);
+						 BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageByteDecode));
+			
+						
+						/*Pega o tipo da imagem*/
+						
+						int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB: bufferedImage.getType();
+						
+						/*Cria imagem em miniatura */
+						BufferedImage resizedImage = new BufferedImage(100, 100, type);
+						Graphics2D g = resizedImage.createGraphics();
+						g.drawImage(resizedImage, 0, 0,100, 100, null);
+						
+						/*Escrever imagem novamente */
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						ImageIO.write(resizedImage, "png", baos);
+						
+						String miniaturaBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
+						
+						usuario.setFotoBase64Miniatura(miniaturaBase64);
+						/* Fim miniatura imagem */
+							
+							
+					} else {
+
 						usuario.setFotoBase64(request.getParameter("fototemp"));
-						usuario.setContentType(request.getParameter("contentTypeTemp"));
+						usuario.setContentType(request
+								.getParameter("contentTypeTemp"));
 					}
-					
+
 					/* Processa PDF */
 					Part curriculoPdf = request.getPart("curriculo");
-					if (curriculoPdf != null && curriculoPdf.getInputStream().available() > 0) {
+					if (curriculoPdf != null
+							&& curriculoPdf.getInputStream().available() > 0) {
 						String curriculoBase64 = new Base64()
 								.encodeBase64String(convertStremParabyte(curriculoPdf
 										.getInputStream()));
@@ -186,9 +225,11 @@ public class Usuario extends HttpServlet {
 						usuario.setCurriculoBase64(curriculoBase64);
 						usuario.setContentTypeCurriculo(curriculoPdf
 								.getContentType());
-					}else{
-						usuario.setCurriculoBase64(request.getParameter("fototempPDF"));
-						usuario.setContentTypeCurriculo(request.getParameter("contentTypeTempPDF"));
+					} else {
+						usuario.setCurriculoBase64(request
+								.getParameter("fototempPDF"));
+						usuario.setContentTypeCurriculo(request
+								.getParameter("contentTypeTempPDF"));
 					}
 				}
 
@@ -198,10 +239,6 @@ public class Usuario extends HttpServlet {
 				boolean podeInserir = true;
 
 				if (login == null || login.isEmpty()) {
-					msg = "Login deve ser informado";
-					podeInserir = false;
-
-				} else if (login == null || login.isEmpty()) {
 					msg = "Login deve ser informado";
 					podeInserir = false;
 

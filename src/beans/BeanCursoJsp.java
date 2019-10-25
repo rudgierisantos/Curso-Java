@@ -26,6 +26,8 @@ public class BeanCursoJsp {
 	
 	private String fotoBase64;
 	
+	private String fotoBase64Miniatura;
+	
 	private String curriculoBase64;
 	
 	private String contentTypeCurriculo;
@@ -33,6 +35,14 @@ public class BeanCursoJsp {
 	private String contentType;
 	
 	private String tempFotoUser;
+	
+	public void setFotoBase64Miniatura(String fotoBase64Miniatura) {
+		this.fotoBase64Miniatura = fotoBase64Miniatura;
+	}
+	
+	public String getFotoBase64Miniatura() {
+		return fotoBase64Miniatura;
+	}
 	
 	public String getTempFotoUser() {
 		
