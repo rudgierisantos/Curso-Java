@@ -142,29 +142,20 @@
 					<td style="width: 150px"><c:out value="${user.nome}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.login}"></c:out></td>
 
-					<c:if test="${user.fotoBase64Miniatura.isEmpty()== false}">
-						<td style="width: 150px"><a
-							href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"></a><img
-							src='<c:out value="${user.fotoBase64Miniatura}"></c:out>'
-							alt="Imagem User" title="Imagem User" width="32px" height="32px"></td>
-					</c:if>
-					<c:if test="${user.fotoBase64Miniatura.isEmpty()== true}">
-						<td style="width: 150px"><img alt="Imagem User"
-							src=resources/img/userpadrao.jpg width="32px" height="32px" onclick="alert('Não possui imagem')"></td>
+					<c:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
+					  <td><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.fotoBase64Miniatura}"/>' alt="Imagem User" title="Imagem User" width="32px" height="32px" /> </a></td>
+					</c:if>	
+					<c:if test="${user.fotoBase64Miniatura.isEmpty() == true}">
+					  <td><img alt="Imagem User" src="resources/img/userpadrao.jpg" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
 					</c:if>
 
-					<c:if test="${user.curriculoBase64.isEmpty()== false}">
-						<td style="width: 150px"><a
-							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img
-								alt="Curriculo" src="resources/img/pdf.ico" width="32px"
-								height="32px"></a></td>
+					<c:if test="${user.curriculoBase64.isEmpty() == false}">	
+					<td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdf.png" width="32px" height="32px"> </a></td>
 					</c:if>
-
-					<c:if test="${user.curriculoBase64.isEmpty()== true}">
-						<td><img alt="Curriculo" src="resources/img/pdf.ico"
-							width="32px" height="32px" onclick="alert('Não Poussui Currículo')"></td>
+					<c:if test="${user.curriculoBase64.isEmpty() == true}">	
+					 <td><img alt="Curriculo" src="resources/img/pdf.ico" width="32px" height="32px" onclick="alert('Não possui curriculo')"></td>
 					</c:if>
-
+					
 
 					<td style="width: 150px"><c:out value="${user.cep}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.rua}"></c:out></td>
