@@ -55,7 +55,7 @@ public class DaoUsuario {
 	public List<BeanCursoJsp> listar() throws Exception {
 		List<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();
 
-		String sql = "select * from usuario";
+		String sql = "select * from usuario where login <> 'admin' ";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
@@ -86,7 +86,7 @@ public class DaoUsuario {
 	public void delete(String id) {
 
 		try {
-			String sql = "delete from usuario where id = '" + id + "'";
+			String sql = "delete from usuario where id = '" + id + "'and login <> 'admin'";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(sql);
 			preparedStatement.execute();
@@ -103,7 +103,7 @@ public class DaoUsuario {
 	}
 
 	public BeanCursoJsp consultar(String id) throws Exception {
-		String sql = "select * from usuario where id = '" + id +"'";
+		String sql = "select * from usuario where id = '" + id +"' and login <> 'admin'";
 		
 		PreparedStatement preaStatement = connection.prepareStatement(sql);
 		ResultSet resultSet = preaStatement.executeQuery();
@@ -142,6 +142,16 @@ public class DaoUsuario {
 		}
 		return false;
 		
+	}
+	
+	public boolean validarLoginUpdate(String login, String id) throws Exception{
+		String sql = "SELECT COUNT(1) as qtd FROM usuario WHERE login = '"+login +"' and id <> " +id;
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()){
+				return resultSet.getInt("qtd") <= 0;
+			}
+			return false;
 	}
 	
 	public boolean validarSenha(String senha) throws Exception {

@@ -9,18 +9,32 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:setProperty property="*" name="calcula" />
 	<center>
 		<h3>Seja bem vindo ao sistema em jsp</h3>
-
-		<a href="salvarUsuario?acao=listartodos"> <img
+		
+		<table>
+		<tr>
+		<td><a href="salvarUsuario?acao=listartodos"> <img
 			alt="Cadastro de Usuário" src="resources/img/usuario.png"
-			width="80px" height="80px">
-		</a> <a href="salvarProduto?acao=listartodos"> <img
+			width="80px" height="80px"></a>
+			</td>
+		<td><a href="salvarProduto?acao=listartodos"> <img
 			alt="Cadastro de Produto" src="resources/img/produto.png"
-			width="80px" height="80px">
-		</a> <a href="index.jsp"><img alt="Sair" src="resources/img/sair.png"
+			width="80px" height="80px"></a>
+			</td>
+			<td>
+		  <a href="index.jsp"><img alt="Sair" src="resources/img/sair.png"
 			width="99px" height="99px"> </a>
+			</td>
+		</tr>
+		
+		<tr>
+		<td>Usuário</td>
+		<td>Produto</td>
+		<td>Sair</td>
+		</tr>
+		</table>
+
 	</center>
 </body>
 </html>

@@ -9,6 +9,9 @@
 </head>
 <body>
 	<div class="login-page">
+		<center><h3 style="color: white">Projeto Didático<h3></center>
+		<center><h2 style="color: white">JSP + Servlet + JDBC</h2></center>
+		<center><span><b>Usuário: admin / <b>Senha: admin</span></center><br/>
 		<div class="form">
 			<form class="login-form" action="LoginServlet" method="post">
 				Login: <input type="text" required id="login" name="login"> <br />
@@ -19,6 +22,7 @@
 
 			</form>
 		</div>
+		<center><h3 style="color: white">Formação Java Web</h3></center>
 	</div>
 </body>
 </html>
