@@ -173,11 +173,9 @@ public class Usuario extends HttpServlet {
 
 					if (imagemFoto != null
 							&& imagemFoto.getInputStream().available() > 0) {
-						
-						byte[] bytesImagem = convertStremParabyte(imagemFoto.getInputStream());
-						
+									
 						String fotoBase64 = new Base64()
-						.encodeBase64String(bytesImagem);
+						.encodeBase64String(convertStremParabyte(imagemFoto.getInputStream()));
 
 						usuario.setFotoBase64(fotoBase64);
 						usuario.setContentType(imagemFoto.getContentType());
@@ -187,7 +185,7 @@ public class Usuario extends HttpServlet {
 						 /*Transformar em um bufferedImage*/
 						/*Transforma emum bufferedImage*/
 						 byte [] imageByteDecode = new Base64().decodeBase64(fotoBase64);
-						 BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytesImagem));
+						 BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageByteDecode));
 			
 						
 						/*Pega o tipo da imagem*/
@@ -197,12 +195,13 @@ public class Usuario extends HttpServlet {
 						/*Cria imagem em miniatura */
 						BufferedImage resizedImage = new BufferedImage(100, 100, type);
 						Graphics2D g = resizedImage.createGraphics();
-						g.drawImage(resizedImage, 0, 0,100, 100, null);
+						g.drawImage(bufferedImage, 0, 0,100, 100, null);
+						g.dispose();
 						
 						/*Escrever imagem novamente */
 						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-						ImageIO.write(bufferedImage, "png", baos);
-						g.dispose();
+						ImageIO.write(resizedImage, "png", baos);
+						
 						
 						String miniaturaBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
 						
