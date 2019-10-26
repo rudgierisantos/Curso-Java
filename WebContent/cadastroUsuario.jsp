@@ -150,7 +150,7 @@
 					</c:if>
 
 					<c:if test="${user.curriculoBase64.isEmpty() == false}">	
-					<td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdf.png" width="32px" height="32px"> </a></td>
+					<td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdf.ico" width="32px" height="32px"> </a></td>
 					</c:if>
 					<c:if test="${user.curriculoBase64.isEmpty() == true}">	
 					 <td><img alt="Curriculo" src="resources/img/pdf.ico" width="32px" height="32px" onclick="alert('Não possui curriculo')"></td>
