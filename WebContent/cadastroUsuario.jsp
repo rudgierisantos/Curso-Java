@@ -119,7 +119,7 @@
 
 	<div class="container">
 		<table class="responsive-table">
-			<caption>Usuários Cadastrados</caption>
+			<caption>Lista de Usuários</caption>
 			<tr>
 				<th>Id</th>
 				<th>Nome</th>
@@ -142,10 +142,10 @@
 					<td style="width: 150px"><c:out value="${user.nome}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.login}"></c:out></td>
 
-					<c:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
+					<c:if test="${user.fotoBase64Miniatura != null}">
 					  <td><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.fotoBase64Miniatura}"/>' alt="Imagem User" title="Imagem User" width="32px" height="32px" /> </a></td>
 					</c:if>	
-					<c:if test="${user.fotoBase64Miniatura.isEmpty() == true}">
+					<c:if test="${user.fotoBase64Miniatura == null}">
 					  <td><img alt="Imagem User" src="resources/img/userpadrao.jpg" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
 					</c:if>
 

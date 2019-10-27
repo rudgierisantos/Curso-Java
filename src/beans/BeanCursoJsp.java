@@ -10,8 +10,6 @@ public class BeanCursoJsp {
 
 	private String nome;
 
-	private String fone;
-
 	private String cep;
 
 	private String rua;
@@ -131,14 +129,6 @@ public class BeanCursoJsp {
 
 	public void setIbge(String ibge) {
 		this.ibge = ibge;
-	}
-
-	public void setFone(String fone) {
-		this.fone = fone;
-	}
-
-	public String getFone() {
-		return fone;
 	}
 
 	public void setNome(String nome) {

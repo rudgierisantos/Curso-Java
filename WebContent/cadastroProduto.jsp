@@ -17,7 +17,7 @@
 	<a href="index.jsp"><img alt="Sair" src="resources/img/sair.png"
 		width="30px" height="30px"> </a>
 	<center>
-		<h1>Cadastro de Produtos</h1>
+		<h1>Lista de Produtos</h1>
 		<h3 style="color: red;">${msg}</h3>
 	</center>
 

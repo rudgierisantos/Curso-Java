@@ -142,7 +142,6 @@ public class Usuario extends HttpServlet {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
-			String fone = request.getParameter("fone");
 			String cep = request.getParameter("cep");
 			String rua = request.getParameter("rua");
 			String bairro = request.getParameter("bairro");
@@ -155,7 +154,6 @@ public class Usuario extends HttpServlet {
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
-			usuario.setFone(fone);
 			usuario.setCep(cep);
 			usuario.setRua(rua);
 			usuario.setBairro(bairro);
@@ -273,7 +271,7 @@ public class Usuario extends HttpServlet {
 						&& daoUsuario.validarLogin(login) && daoUsuario.validarSenha(senha)&& podeInserir) {
 					daoUsuario.salvar(usuario);
 
-				} else if (id != null && !id.isEmpty() && podeInserir) {
+				}  if (id != null && !id.isEmpty() && podeInserir) {
 					if(!daoUsuario.validarLoginUpdate(login, id)){
 						request.setAttribute("msg",  "Login já existe para outro usuário");
 					}else{
