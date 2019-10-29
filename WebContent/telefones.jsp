@@ -53,7 +53,7 @@
 
 	<div class="container">
 		<table class="responsive-table">
-			<caption>Usuários Cadastrados</caption>
+			<caption>Lista de Telefones</caption>
 			<tr>
 				<th>Id</th>
 				<th>Número</th>
