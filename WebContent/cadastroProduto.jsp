@@ -40,8 +40,8 @@
 
 					<tr>
 						<td>Quantidade:</td>
-						<td><input type="number" id="quantidade" name="quantidade"
-							maxlength="10" value="${produto.quantidade}"></td>
+						<td><input type="text" id="quantidade" name="quantidade" 
+							maxlength="5"  value="${produto.quantidade}"></td>
 					</tr>
 
 					<tr>
@@ -81,7 +81,7 @@
 					<td style="width: 150px"><c:out value="${produto.quantidade}"></c:out></td>
 					<td style="width: 150px"><fmt:formatNumber type="number" maxFractionDigits="2" value="${produto.valor}"/></td>
 
-					<td><a href="salvarProduto?acao=delete&produto=${produto.id}"><img
+					<td><a href="salvarProduto?acao=delete&produto=${produto.id}" onclick="return confirm('Confirmar a exclusão?');"><img
 							src="resources/img/excluir.png" alt="Excluir" title="Excluir"
 							width="20px" height="20px"></a></td>
 					<td><a href="salvarProduto?acao=editar&produto=${produto.id}"><img
@@ -114,6 +114,12 @@
 $(function() {
     $('#valor').maskMoney();
   })
+  
+  $(document).ready(function(){
+	  $("#quantidade").keyup(function(){
+		  $("#quantidade").val(this.value.match(/[0-9]*/));
+	  });
+  });
 
 </script>
 </html>

@@ -22,8 +22,8 @@ public class DaoUsuario {
 	public void salvar(BeanCursoJsp usuario) {
 		try {
 
-			String sql = "insert into usuario(login, senha, nome, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype, curriculoBase64, contentTypeCurriculo, fotoBase64Miniatura) "
-					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into usuario(login, senha, nome, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype, curriculoBase64, contentTypeCurriculo, fotoBase64Miniatura, ativo) "
+					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, usuario.getLogin());
 			insert.setString(2, usuario.getSenha());
@@ -39,6 +39,7 @@ public class DaoUsuario {
 			insert.setString(12, usuario.getCurriculoBase64());
 			insert.setString(13, usuario.getContentTypeCurriculo());
 			insert.setString(14, usuario.getFotoBase64Miniatura());
+			insert.setBoolean(15, usuario.isAtivo());
 			insert.execute();
 			connection.commit();
 
@@ -79,6 +80,7 @@ public class DaoUsuario {
 					.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet
 					.getString("contenttypecurriculo"));
+			beanCursoJsp.setAtivo(resultSet.getBoolean("ativo"));
 			listar.add(beanCursoJsp);
 
 		}
@@ -132,6 +134,7 @@ public class DaoUsuario {
 					.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet
 					.getString("contenttypecurriculo"));
+			beanCursoJsp.setAtivo(resultSet.getBoolean("ativo"));
 
 			return beanCursoJsp;
 		}
@@ -182,7 +185,7 @@ public class DaoUsuario {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append(" UPDATE usuario set login = ? , senha = ?, nome = ?, cep = ?, rua = ?, ");
-			sql.append(" bairro = ?, cidade = ?, estado = ?, ibge = ? ");
+			sql.append(" bairro = ?, cidade = ?, estado = ?, ibge = ?, ativo = ? ");
 
 			if (usuario.isAtualizarImagem()) {
 				sql.append(" , fotobase64 = ?,contenttype = ? ");
@@ -208,27 +211,28 @@ public class DaoUsuario {
 			preparedStatement.setString(7, usuario.getCidade());
 			preparedStatement.setString(8, usuario.getEstado());
 			preparedStatement.setString(9, usuario.getIbge());
+			preparedStatement.setBoolean(10, usuario.isAtivo());
 
 			if (usuario.isAtualizarImagem()) {
-				preparedStatement.setString(10, usuario.getFotoBase64());
-				preparedStatement.setString(11, usuario.getContentType());
+				preparedStatement.setString(11, usuario.getFotoBase64());
+				preparedStatement.setString(12, usuario.getContentType());
 			}
 
 			if (usuario.isAtualizarPdf()) {
 
 				if (usuario.isAtualizarPdf() && !usuario.isAtualizarImagem()) {
-					preparedStatement.setString(10,
-							usuario.getContentTypeCurriculo());
 					preparedStatement.setString(11,
+							usuario.getContentTypeCurriculo());
+					preparedStatement.setString(12,
 							usuario.getCurriculoBase64());
 				} else {
-					preparedStatement.setString(12,
-							usuario.getContentTypeCurriculo());
 					preparedStatement.setString(13,
+							usuario.getContentTypeCurriculo());
+					preparedStatement.setString(14,
 							usuario.getCurriculoBase64());
 				}
 			} else if (usuario.isAtualizarImagem()) {
-				preparedStatement.setString(12,
+				preparedStatement.setString(13,
 						usuario.getFotoBase64Miniatura());
 			}
 

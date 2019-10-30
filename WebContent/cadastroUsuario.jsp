@@ -1,3 +1,4 @@
+<%@page import="beans.BeanCursoJsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -41,6 +42,7 @@
 					</tr>
 
 					<tr>
+					
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome" maxlength="50"
 							value="${user.nome }" placeholder="Informe o Nome de Usuário"
@@ -84,6 +86,24 @@
 						<td><input type="text" id="estado" name="estado" maxlength="20"
 							 placeholder="Informe o Estado"
 							value="${user.estado}"></td>
+					</tr>
+					
+					<tr>
+					<td>Ativo: </td>
+					<td><input type = "checkbox" id="ativo" name = "ativo" 
+					<%
+					   if(request.getAttribute("user") != null){
+						   
+						   BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						   if(user.isAtivo()){
+							   out.print(" ");
+							   out.print("checked=\"checked\"");
+							   out.print(" ");
+						   }
+					   }
+					%>
+					>
+					</td>
 					</tr>
 
 					<tr>
@@ -156,7 +176,7 @@
 					<td style="width: 150px"><c:out value="${user.estado}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.ibge}"></c:out></td>
 
-					<td><a href="salvarUsuario?acao=delete&user=${user.id}"><img
+					<td><a href="salvarUsuario?acao=delete&user=${user.id}" onclick="return confirm('Confirmar a exclusão?');"><img
 							src="resources/img/excluir.png" alt="Excluir" title="Excluir"
 							width="20px" height="20px"></a></td>
 					<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img

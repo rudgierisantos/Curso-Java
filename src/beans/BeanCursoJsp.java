@@ -38,8 +38,17 @@ public class BeanCursoJsp {
 	
 	private boolean atualizarPdf = true;
 	
+	private boolean ativo;
 	
 	
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	public boolean isAtualizarImagem() {
 		return atualizarImagem;
 	}
