@@ -38,15 +38,14 @@
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep" maxlength="8"
 							value="${user.cep}" placeholder="Informe o Cep"
-							onblur="consultaCep();" ></td>
+							onblur="consultaCep();"></td>
 					</tr>
 
 					<tr>
-					
+
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome" maxlength="50"
-							value="${user.nome }" placeholder="Informe o Nome de Usuário"
-							></td>
+							value="${user.nome }" placeholder="Informe o Nome de Usuário"></td>
 
 						<td>Rua:</td>
 						<td><input type="text" id="rua" name="rua" maxlength="50"
@@ -56,72 +55,163 @@
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}" maxlength="10" placeholder="informe o login"
-							></td>
+							value="${user.login}" maxlength="10"
+							placeholder="informe o login"></td>
 
 						<td>Bairro:</td>
-						<td><input type="text" id="bairro" name="bairro" maxlength="50"
-							value="${user.bairro}" placeholder="Informe o bairro"
-							></td>
+						<td><input type="text" id="bairro" name="bairro"
+							maxlength="50" value="${user.bairro}"
+							placeholder="Informe o bairro"></td>
 					</tr>
 
 					<tr>
 						<td>Senha:</td>
-						<td><input type="password" id="senha" name="senha" maxlength="10"
-							value="${user.senha }" placeholder="Defina uma senha"
-							></td>
+						<td><input type="password" id="senha" name="senha"
+							maxlength="10" value="${user.senha }"
+							placeholder="Defina uma senha"></td>
 
 						<td>Cidade:</td>
-						<td><input type="text" id="cidade" name="cidade" maxlength="50"
-							value="${user.cidade}" placeholder="Informe a cidade"
-							></td>
+						<td><input type="text" id="cidade" name="cidade"
+							maxlength="50" value="${user.cidade}"
+							placeholder="Informe a cidade"></td>
 					</tr>
 
 					<tr>
 						<td>IBGE:</td>
 						<td><input type="text" id="ibge" name="ibge" maxlength="30"
 							placeholder="Informe o Ibge" value="${user.ibge}"></td>
-							
-							<td>UF:</td>
-						<td><input type="text" id="estado" name="estado" maxlength="20"
-							 placeholder="Informe o Estado"
+
+						<td>UF:</td>
+						<td><input type="text" id="estado" name="estado"
+							maxlength="20" placeholder="Informe o Estado"
 							value="${user.estado}"></td>
-					</tr>
-					
-					<tr>
-					<td>Ativo: </td>
-					<td><input type = "checkbox" id="ativo" name = "ativo" 
-					<%
-					   if(request.getAttribute("user") != null){
-						   
-						   BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-						   if(user.isAtivo()){
-							   out.print(" ");
-							   out.print("checked=\"checked\"");
-							   out.print(" ");
-						   }
-					   }
-					%>
-					>
-					</td>
 					</tr>
 
 					<tr>
+
+						<td>Perfil</td>
+						<td><select id="perfil" name="perfil"
+							style="width: 185px; height: 30px">
+
+								<option value="nao_informado">[--SELECIONE--]</option>
+
+								<option value="administrador" 
+								<%if (request.getAttribute("user") != null) {
+			
+							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+							if (user.getPerfil().equalsIgnoreCase("administrador")){
+								out.print(" ");
+								out.print("selected=\"selected\"");
+								out.print(" ");
+							}
+						}%>
+
+									>Administrador</option>
+
+								<option value="secretario" 
+								<%if (request.getAttribute("user") != null) {
+			
+							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+							if (user.getPerfil().equalsIgnoreCase("secretario")){
+								out.print(" ");
+								out.print("selected=\"selected\"");
+								out.print(" ");
+							}
+						}%>
+								
+								>Secretário(a)</option>
+
+								<option value="gerente" 
+								
+								<%if (request.getAttribute("user") != null) {
+			
+							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+							if (user.getPerfil().equalsIgnoreCase("gerente")){
+								out.print(" ");
+								out.print("selected=\"selected\"");
+								out.print(" ");
+							}
+						}%>
+								
+								>Gerente</option>
+
+								<option value="funcionario"
+								
+								
+								<%if (request.getAttribute("user") != null) {
+			
+							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+							if (user.getPerfil().equalsIgnoreCase("funcionario")){
+								out.print(" ");
+								out.print("selected=\"selected\"");
+								out.print(" ");
+							}
+						}%>
+								
+								>Funcionário</option>
+
+						</select></td>
+
+						<td>Curriculo:</td>
+						<td><input type="file" id="foto" name="curriculo"></td>
+
+					</tr>
+
+					<tr>
+
+						<td>Ativo:</td>
+						<td><input type="checkbox" id="ativo" name="ativo"
+							<%if (request.getAttribute("user") != null) {
+
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.isAtivo()) {
+					out.print(" ");
+					out.print("checked=\"checked\"");
+					out.print(" ");
+				}
+			}%>>
+						</td>
+
+
 						<td>Foto:</td>
 						<td><input type="file" id="foto" name="foto"></td>
 					</tr>
 
 					<tr>
-						<td>Curriculo:</td>
-						<td><input type="file" id="foto" name="curriculo"></td>
-					</tr>
+						<td>Sexo:</td>
+						<td><input type="radio" name="sexo"
+							<%if (request.getAttribute("user") != null) {
 
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.getSexo().equalsIgnoreCase("masculino")) {
+					out.print(" ");
+					out.print("checked=\" checked\"");
+					out.print(" ");
+
+				}
+			}%>
+							value="masculino">Masculino</input> <input type="radio"
+							name="sexo"
+							<%if (request.getAttribute("user") != null) {
+
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.getSexo().equalsIgnoreCase("feminino")) {
+					out.print(" ");
+					out.print("checked=\" checked\"");
+					out.print(" ");
+
+				}
+			}%>
+							value="feminino">Feminino</input></td>
+
+					</tr>
 
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar" style="width: 173px"></td> 
-							<td></td>
-						<td><input type="submit" value="Cancelar" style="width: 173px"
+						<td><input type="submit" value="Salvar" style="width: 173px"></td>
+						<td></td>
+						<td><input type="submit" value="Cancelar"
+							style="width: 173px"
 							onclick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'"></td>
 					</tr>
 				</table>
@@ -155,19 +245,30 @@
 					<td style="width: 150px"><c:out value="${user.login}"></c:out></td>
 
 					<c:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
-					  <td><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img src='<c:out value="${user.fotoBase64Miniatura}"/>' alt="Imagem User" title="Imagem User" width="32px" height="32px" /> </a></td>
-					</c:if>	
+						<td><a
+							href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
+								src='<c:out value="${user.fotoBase64Miniatura}"/>'
+								alt="Imagem User" title="Imagem User" width="32px" height="32px" />
+						</a></td>
+					</c:if>
 					<c:if test="${user.fotoBase64Miniatura == null}">
-					  <td><img alt="Imagem User" src="resources/img/userpadrao.jpg" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
+						<td><img alt="Imagem User" src="resources/img/userpadrao.jpg"
+							width="32px" height="32px" onclick="alert('Não possui imagem')">
+						</td>
 					</c:if>
 
-					<c:if test="${user.curriculoBase64.isEmpty() == false}">	
-					<td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdf.ico" width="32px" height="32px"> </a></td>
+					<c:if test="${user.curriculoBase64.isEmpty() == false}">
+						<td><a
+							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img
+								alt="Curriculo" src="resources/img/pdf.ico" width="32px"
+								height="32px"> </a></td>
 					</c:if>
-					<c:if test="${user.curriculoBase64 == null}">	
-					 <td><img alt="Curriculo" src="resources/img/pdf.ico" width="32px" height="32px" onclick="alert('Não possui curriculo')"></td>
+					<c:if test="${user.curriculoBase64 == null}">
+						<td><img alt="Curriculo" src="resources/img/pdf.ico"
+							width="32px" height="32px"
+							onclick="alert('Não possui curriculo')"></td>
 					</c:if>
-					
+
 
 					<td style="width: 150px"><c:out value="${user.cep}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.rua}"></c:out></td>
@@ -176,7 +277,8 @@
 					<td style="width: 150px"><c:out value="${user.estado}"></c:out></td>
 					<td style="width: 150px"><c:out value="${user.ibge}"></c:out></td>
 
-					<td><a href="salvarUsuario?acao=delete&user=${user.id}" onclick="return confirm('Confirmar a exclusão?');"><img
+					<td><a href="salvarUsuario?acao=delete&user=${user.id}"
+						onclick="return confirm('Confirmar a exclusão?');"><img
 							src="resources/img/excluir.png" alt="Excluir" title="Excluir"
 							width="20px" height="20px"></a></td>
 					<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
@@ -206,23 +308,23 @@
 			} else if (document.getElementById("ibge").value == '') {
 				alert('Informe o ibge');
 				return false;
-				
+
 			} else if (document.getElementById("cep").value == '') {
 				alert('Informe o Cep');
 				return false;
-				
+
 			} else if (document.getElementById("rua").value == '') {
 				alert('Informe a Rua');
 				return false;
-				
+
 			} else if (document.getElementById("bairro").value == '') {
 				alert('Informe o Bairro');
 				return false;
-				
+
 			} else if (document.getElementById("cidade").value == '') {
 				alert('Informe a Cidade');
 				return false;
-				
+
 			} else if (document.getElementById("estado").value == '') {
 				alert('Informe o Estado');
 				return false;
