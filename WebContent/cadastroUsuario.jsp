@@ -95,60 +95,49 @@
 
 								<option value="nao_informado">[--SELECIONE--]</option>
 
-								<option value="administrador" 
-								<%if (request.getAttribute("user") != null) {
-			
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("administrador")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}%>
+								<option value="administrador"
+									<%if (request.getAttribute("user") != null) {
 
-									>Administrador</option>
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.getPerfil().equalsIgnoreCase("administrador")) {
+					out.print(" ");
+					out.print("selected=\"selected\"");
+					out.print(" ");
+				}
+			}%>>Administrador</option>
 
-								<option value="secretario" 
-								<%if (request.getAttribute("user") != null) {
-			
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("secretario")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}%>
-								
-								>Secretário(a)</option>
+								<option value="secretario"
+									<%if (request.getAttribute("user") != null) {
 
-								<option value="gerente" 
-								
-								<%if (request.getAttribute("user") != null) {
-			
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("gerente")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}%>
-								
-								>Gerente</option>
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.getPerfil().equalsIgnoreCase("secretario")) {
+					out.print(" ");
+					out.print("selected=\"selected\"");
+					out.print(" ");
+				}
+			}%>>Secretário(a)</option>
+
+								<option value="gerente"
+									<%if (request.getAttribute("user") != null) {
+
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.getPerfil().equalsIgnoreCase("gerente")) {
+					out.print(" ");
+					out.print("selected=\"selected\"");
+					out.print(" ");
+				}
+			}%>>Gerente</option>
 
 								<option value="funcionario"
-								
-								
-								<%if (request.getAttribute("user") != null) {
-			
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("funcionario")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}%>
-								
-								>Funcionário</option>
+									<%if (request.getAttribute("user") != null) {
+
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.getPerfil().equalsIgnoreCase("funcionario")) {
+					out.print(" ");
+					out.print("selected=\"selected\"");
+					out.print(" ");
+				}
+			}%>>Funcionário</option>
 
 						</select></td>
 
@@ -219,6 +208,22 @@
 		</ul>
 	</form>
 
+	<!-- Pesquisa de Usuário -->
+	
+	<form method="post" action="servletsPesquisa">
+	<ul class="form-style-1">
+		<li>
+			<table>
+			  <tr>
+			  <td>Descrição</td>
+			  <td><input type="text" id="descricaoconsulta" name="descricaoconsulta"></td>
+			  <td><input type = "submit" value = "Pesquisar" ></td>
+			 </tr>
+			</table>
+		</li>
+	</ul>
+	</form>
+	<!-- Fim pesquisa de Usuários -->
 	<div class="container">
 		<table class="responsive-table">
 			<caption>Lista de Usuários</caption>

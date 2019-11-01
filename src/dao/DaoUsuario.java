@@ -56,12 +56,21 @@ public class DaoUsuario {
 
 		}
 	}
+	
+	public List<BeanCursoJsp>  listar(String descricaoconsulta) throws SQLException{
+		String sql = "select * from usuario where login <> 'admin' and nome like '%"+descricaoconsulta+"%'";
+	    return consultarUsuarios(sql);
+	}
 
 	public List<BeanCursoJsp> listar() throws Exception {
-		List<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();
-
 		String sql = "select * from usuario where login <> 'admin' ";
+		return consultarUsuarios(sql);
 
+	}
+
+	private List<BeanCursoJsp> consultarUsuarios(String sql)
+			throws SQLException {
+		List<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 		while (resultSet.next()) {
@@ -90,7 +99,7 @@ public class DaoUsuario {
 			listar.add(beanCursoJsp);
 
 		}
-
+		
 		return listar;
 	}
 
