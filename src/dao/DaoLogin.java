@@ -18,7 +18,7 @@ public class DaoLogin {
 	public boolean validarLogin(String login, String senha) throws Exception {
 
 		String sql = "select * from usuario where login = '" + login
-				+ "' and senha = '" + senha + "'";
+				+ "' and senha = '" + senha + "' and ativo = 'TRUE'";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 
