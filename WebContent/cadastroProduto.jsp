@@ -49,6 +49,22 @@
 						<td><input type="text" id="valor" name="valor" maxlength="12" data-thousands="." data-decimal="," data-precision = "2"
 							value="${produto.valorEmTexto}"></td>
 					</tr>
+					
+					<tr>
+					<td>Categoria:</td>
+					<td>
+						<select id = categorias name="categoria_id">
+						 <c:forEach items="${categorias}" var = "cat">
+						 	<option value = "${cat.id}" id="${cat.id}" 
+						 	<c:if test="${cat.id == produto.categoria_id}">
+						 	<c:out value = "selected=selected" />
+						 	</c:if>>
+						 	${cat.nome}
+						 	</option>
+						 </c:forEach>
+						</select>
+					</td>
+					</tr>
 
 					<tr>
 						<td></td>
